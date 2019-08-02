@@ -12,18 +12,16 @@ puerta mi_puerta;
 
 
 void *worker(void *arg) {
-    struct timeval t, t2;
-    int micro;	
+    int t_final, t_inicial;	
     int i;
-    gettimeofday(&t, NULL);
+    t_inicial = GetTime();
     cerrar_puerta(mi_puerta);
     for (i = 0; i < loops; i++) {
 	counter++;
     }
     abrir_puerta(mi_puerta);
-    gettimeofday(&t2, NULL);
-    micro = ((t2.tv_usec - t.tv_usec)  + ((t2.tv_sec - t.tv_sec) * 1000000.0f));
-    printf("Tiempo trascurrido : %d\n", micro);
+    t_final = GetTime();
+    printf("Tiempo trascurrido : %d\n", t_final-t_inicial);
     return NULL;
 }
 
