@@ -6,7 +6,7 @@
 
 volatile int counter = 0; 
 int loops;
-int t_final, t_inicial;
+double t_final, t_inicial;
 
 puerta mi_puerta;
 
