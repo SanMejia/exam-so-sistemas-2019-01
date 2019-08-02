@@ -6,27 +6,25 @@
 
 volatile int counter = 0; 
 int loops;
+int t_final, t_inicial;
 
 puerta mi_puerta;
 
 
 
-void *worker(void *arg) {
-    int t_final, t_inicial;	
+void *worker(void *arg) {	
     int i;
-    t_inicial = GetTime();
     cerrar_puerta(mi_puerta);
     for (i = 0; i < loops; i++) {
 	counter++;
     }
     abrir_puerta(mi_puerta);
-    t_final = GetTime();
-    printf("Tiempo trascurrido : %d\n", t_final-t_inicial);
     return NULL;
 }
 
 
 int main(int argc, char *argv[]) {
+    t_inicial = GetTime();
     if (argc != 2) { 
 	fprintf(stderr, "usage: threads <loops>\n"); 
 	exit(1); 
@@ -41,5 +39,7 @@ int main(int argc, char *argv[]) {
     pthread_join(p2, NULL);
     printf("Final value   : %d\n", counter);
     destruir_puerta(mi_puerta);
+    t_final = GetTime();
+    printf("Tiempo trascurrido : %d\n", t_final-t_inicial);
     return 0;
 }
